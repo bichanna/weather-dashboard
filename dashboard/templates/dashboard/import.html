@@ -1,0 +1,10 @@
+{% extends "dashboard/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<form action="" method="POST" enctype="multipart/form-data">
+	{% bootstrap_form form %}
+	{% csrf_token %}
+	<button type="submit" class="btn btn-primary btn-lg">送信</button>
+</form>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html>
+	<head>
+		{% bootstrap_css %}
+		{% bootstrap_javascript jquery="slim" %}
+		<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">		
+	</head>
+
+
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<a class="navbar-brand" href="/">お天気 Dashboard </a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav mr-auto">
+					<!--　左にメニューを出す時 -->
+				</ul>
+
+				<ul class="navbar-nav">
+					<!-- 右にメニューを出すとき -->
+					
+					{% if user.is_authenticated %}
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'login' %}">ログイン</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+		</nav>
+
+		<div class="content container">
+			<div class="row">
+				<div class="col-md-12">
+					{% block content %}
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+		{% block js %}
+		{% endblock %}
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

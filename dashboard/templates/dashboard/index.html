@@ -1,0 +1,17 @@
+{% extends 'dashboard/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+{% if user.is_authenticated %}
+	<div class="row p-3">
+		<a href="{% url 'dashboard:import_csv' %}" class="btn btn-primary btn-lg">データの取り込み</a>
+	</div>
+{% endif %}
+
+<h1 class="pt-5 pr-2">場所一覧</h1>
+{% for location in location_list %}
+	<div class="p-5">
+		<h2>{{ location }}</h2>
+	</div>
+{% endfor %}
+{% endblock %}
