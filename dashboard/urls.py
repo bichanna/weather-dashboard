@@ -14,4 +14,5 @@ app_name = "dashboard"
 urlpatterns = [
 	path("", views.IndexView.as_view(), name="index"),
 	path("add", views.WeatherDataImport.as_view(), name="import_csv"),
+	path("data/<int:pk>.js", views.GraphView.as_view(), name="plot"),
 ]

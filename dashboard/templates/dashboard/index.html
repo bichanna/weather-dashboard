@@ -9,9 +9,12 @@
 {% endif %}
 
 <h1 class="pt-5 pr-2">場所一覧</h1>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 {% for location in location_list %}
 	<div class="p-5">
 		<h2>{{ location }}</h2>
+		<canvas id="myChart-{{ location.pk }}"></canvas>
+		<script type="text/javascript" src="{% url 'dashboard:plot' location.pk %}"></script>
 	</div>
 {% endfor %}
 {% endblock %}
