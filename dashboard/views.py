@@ -79,10 +79,29 @@ class WeatherDataImport(LoginRequiredMixin, generic.FormView):
 
 
 
+class GraphView(generic.View):
+	"""
+		グラフ表示用のJavascriptを生成するビュー
+	"""
+	template_name = "dashboard/script.js"
 
+	def get(self, request, *args, **kwargs):
+		"""
+			getメソッド呼び出し時にjavascriptを生成
+		"""
+		pk = kwargs["pk"]
 
+		#指定されたロケーションの気象データ
+		weather_data = WeatherData.objects.select_related("location").filter(location_id=pk)
+		#データのプロット
+		context = {}
+		context["pk"] = pk
+		context["date"] = [data.date.strftime("%Y/%m/%d") for data in weather_data]
+		context["max_temp"] = [data.max_temp for data in weather_data]
+		context["min_temp"] = [data.min_temp for data in weather_data]		
+		context["humidity"] = [data.humidity for data in weather_data]
 
-
+		return render(request, self.template_name, context, content_type="text/javascript")
 
 
 
